@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Variables</title>
+      <style>
+      </style>
+  </head>
+
+  <body>
+
+    <p>Cart Quantity</p>
+    <button onclick="onShowQuantity();">Show Quantity</button>
+    <button onclick="onAddToCart1();">Add to Cart</button>
+    <button onclick="onPlus2();">+2</button>
+    <button onclick="onPlus3();">+3</button>
+    <button onclick="onReset();">Reset Cart</button>
+    <p class="js-para"></p>
+    <p></p>
+    <button onclick="checkEmptyCart(1)">Remove from cart</button>
+    <button onclick="checkEmptyCart(2);">-2</button>
+    <button onclick="checkEmptyCart(3)">-3</button>
+
+
+    <p></p>
+    <label>Select quantity</label>
+    <select id="qt">
+      <option value=1>1</option>
+      <option value=2>2</option>
+      <option value=3>3</option>
+      <option value=4>5</option>
+      <option value=6>6</option>
+      <option value=7>7</option>
+      <option value=8>8</option>
+      <option value=9>9</option>
+      <option value=10>10</option>
+    </select>
+    <button onclick="onAddToCart2();">Add to Cart</button>
+
+    <script>
+      let quantity = 0;
+      const cartMaxQuantity = 10;
+      const paraElement = document.querySelector('.js-para');
+
+      onShowQuantity = () => {
+        console.log(`Cart quantity: ${quantity}`);
+        paraElement.innerHTML = `Cart quantity: ${quantity}`;
+      }
+      
+
+      checkEmptyCart = amount => {
+        ((quantity - amount) < 0) ? alert('Not enough items in the cart') : quantity -= amount;
+        onShowQuantity();
+      }
+
+      checkQuantitynAdd = qt => {
+        if ((quantity + qt) > cartMaxQuantity) {
+          alert('Cart is full');
+          return;
+        }
+        
+        quantity += qt;
+      }
+
+      onAddToCart1 = () => {
+        checkQuantitynAdd(1);
+        onShowQuantity();
+      }
+
+      onAddToCart2 = () => {
+        let qt = document.getElementById('qt').value;
+        quantity += (+qt); // + before variable converrt string number to an integer.
+        onShowQuantity();
+      }
+
+      onPlus2 = () => {
+        checkQuantitynAdd(2);
+        ///quantity += 2;
+        onShowQuantity();
+      }
+
+      onPlus3 = () => {
+        checkQuantitynAdd(3);
+        ///quantity += 3;
+        onShowQuantity();
+      }
+
+      onReset = () => {
+        quantity = 0;
+        console.log('Cart was reset');
+        onShowQuantity();
+      }
+
+    </script>
+  </body>
+</html>

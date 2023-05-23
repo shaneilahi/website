@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Objects</title>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script>
+      /*
+      const product = {
+        name: 'socks', // this is called propery-value pair
+        price: 1090
+      };
+      console.log(product); 
+
+      // Add new property to an existing object
+      product.newProp = true;
+      console.log(product);
+
+      product.newProp2 = true;
+      console.log(product);
+
+      // Delete an existing property-value pair from an object
+      delete product.newProp2;
+      console.log(product);
+
+      const object = {
+        message: 'hi',
+        price: 499
+      };
+
+      // to get message property value pair out inn a variable u can do in 2 ways
+      // 1: vaniilla way
+      //const message = object.message;
+      // 2: destruction way. only if u want to name the variable namme is same as the property name
+      // benefiit of using destructiion is that u can get many property out of a object by just adding the name iinside the parenthsis after a commma
+      const { message, price } = object; // grabs the message and priice property value out of the object and saves it in a new variable that's of sammme namme of the property
+      console.log(message + ' '+ price);
+
+      // shorthand shortcut
+
+      const object2 = {
+        // instead of this
+        //message: message
+        // we can do the above thing through sh shortcut
+        message,
+
+        // instead of this
+        memthod: () => {
+          console.log('memthod');
+        },
+        // u could do this
+        memthod2() {
+          console.log('memthod');
+        }
+      }
+      console.log(object2);
+      object2.memthod2();
+      */
+
+      // exercises
+      // 8a.
+
+      const product = {
+        basketball: {
+          price: 2095
+        }
+      }
+      let { price } = product.basketball;
+      console.log(price * 0.01); // 20.95 in cents
+
+      // 8b.
+
+      // increase basketball pricet by 500 cents
+      product.basketball.price += 500;
+      console.log(product.basketball.price * 0.01); // 25.95$
+
+      // 8c.
+      // add a new property 'delivery-time'
+      product.basketball['delivery-time'] = '3 days';
+      console.log(product.basketball);
+
+      // 8d.
+      // create a functiion that compares two products and returns product that is lexx expensive
+      
+      const product1 = {
+        name: 'basketball',
+        price: 2095
+      };
+
+      const product2 = {
+        name: 'shirt',
+        price: 3999
+      };
+
+      let comparePrice = (product1, product2) => {
+        if (product1.price < product2.price)
+            return product1;
+        else
+            return product2;
+      };
+
+      console.log(comparePrice(product1, product2));
+
+      // 8e.
+      // create a function that checks if 2 products have the samme properties values or not
+      let isSameProduct = (product1, product2) => {
+        if (product1.name === product2.name && product1.price === product2.price)
+            return true;
+        else
+            return false;
+      }
+
+      console.log(isSameProduct(
+      {
+        name: 'basketball',
+        price: 2095
+      },
+      {
+        name: 'basketball',
+        price: 2095
+      }
+      ));
+
+      // 8f.
+      // convert string to lowercase
+      console.log('lol'.toUpperCase());
+
+      // 8g.
+      // repeat a string x many times
+      console.log('test'.repeat(2));
+
+      
+
+  </script>
+  </body>
+</html>

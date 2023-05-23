@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>09 Exe</title>
+  </head>
+  <body> 
+    <p>9A and 9B</p>
+    <button>9A</button>
+    <button class="js-button-1">9b</button>
+    <p></p>
+
+    <p>9c</p>
+    <button onclick="onHeadsOrTails('heads')">heads</button>
+    <button onclick="onHeadsOrTails('tails')">tails</button>
+    <p class="js-paragraph"></p>
+    <p></p>
+
+    <p>9d</p>
+    <input type="text" class="js-input" onkeydown="handleOnSubmit(event);"/>
+    <button onclick="onSubmit();" id="sub1">Submit</button>
+    <p class="js-paragraph-2"></p>
+
+    <script>
+      // 9a.
+      const buttonElement = document.querySelector('button');
+      console.log(buttonElement);
+
+      // 9b
+      const buttonElement1 = document.querySelector('.js-button-1');
+      buttonElement1.innerHTML = '9b done'
+
+      // 9c
+      const paraElement = document.querySelector('.js-paragraph');
+      const onHeadsOrTails = move => paraElement.innerHTML = `You chose: ${move}`;
+
+      // 9d
+      const inputElement = document.querySelector('.js-input');
+      const onSubmit = () => {
+        document.querySelector('.js-paragraph-2').innerHTML = `Your name is: ${inputElement.value}`;
+      }
+      const handleOnSubmit = event => (event.key === 'Enter') ? onSubmit() : null ;
+
+      
+    </script>
+  </body>
+</html>

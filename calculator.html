@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+  <head></head>
+  <body>
+
+    <p>Calculator</p>
+
+    <div>
+      <p class="js-calculation"></p>
+      <button onclick="on1();">1</button>
+      <button onclick="on2();">2</button>
+      <button onclick="on3();">3</button>
+      <button onclick="onPlus();">+</button>
+    </div>
+
+    <p>
+      <button onclick="calculation += 4; logCal();">4</button>
+      <button onclick="calculation += 5; logCal();">5</button>
+      <button onclick="calculation += 6; logCal();">6</button>
+      <button onclick="calculation += ' - '; logCal();">-</button>
+    </p>
+    
+    <p>
+      <button onclick="calculation += 7; logCal();">7</button>
+      <button onclick="calculation += 8; logCal();">8</button>
+      <button onclick="calculation += 9; logCal();">9</button>
+      <button onclick="calculation += '*'; logCal();">*</button>
+    </p>
+
+    <p>
+      <button onclick="calculation += 0; logCal();">0</button>
+      <button onclick="calculation += '.'; logCal();">.</button>
+      <button onclick="onEqual();">=</button>
+      <button onclick="calculation += ' / '; logCal();">/</button>
+    </p>
+
+    <p>
+      <button onclick="console.log('Cleared'); calculation = ''; logCal();">Clear</button>
+    </p>
+    <script>
+      let calculation = '';
+      let jsCalculation = document.getElementsByClassName('js-calculation');
+
+      logCal = () => {
+        console.log(calculation);
+        jsCalculation[0].innerHTML = calculation;
+      }
+ 
+      on1 = () => {
+        calculation += '1';
+        logCal();
+      }
+
+      on2 = () => {
+        calculation += '2';
+        logCal();
+      }
+
+      on3 = () => {
+        calculation += '3';
+        logCal();
+      }
+
+      onPlus = () => {
+        calculation += ' + ';
+        logCal();
+      }
+
+      onEqual = () => {
+        calculation = eval(calculation);
+
+        logCal();
+      }
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Rock Paper Scissor</title>
+    <link rel="stylesheet" href="styles/10-exercises.css">
+  </head>
+  <body>
+
+    <!-- 10c. Amazon button -->
+    <button class="amazon-button">Add to Cart</button> <p></p>
+
+    <!-- 10b. Uber button -->
+    <button class="uber-button-1">Request now</button>
+    <button class="uber-button-2">Schedeule for later</button>
+
+    <!-- 10c. class list -->
+    <button class="jjs-button">Test</button> <p></p>
+
+    <!-- 10d. On/Off Button -->
+    <button class="gaming-button" onclick="game();">Gaming</button> <p></p>
+
+    <!-- 10e. 3 Buttons on/off -->
+    <button class="button-1 buttons" onclick="addToggle('button-1');">Gaming</button>
+    <button class="button-2 buttons" onclick="addToggle('button-2');">Music</button>
+    <button class="button-3 buttons" onclick="addToggle('button-3');">Tech</button> <p></p>
+
+    <!-- 10g. 3 Buttons on/off -->
+    <button class="buttonx-1 buttons" onclick="addTogglex('buttonx-1');">Gaming</button>
+    <button class="buttonx-2 buttons" onclick="addTogglex('buttonx-2');">Music</button>
+    <button class="buttonx-3 buttons" onclick="addTogglex('buttonx-3');">Tech</button>
+
+    <script src="scripts/10-exercises.js"></script>
+    <script>
+      let prevbutton = undefined;
+      let activeToggle = false;
+      const addTogglex = className => {
+        const button = document.querySelector(`.${className}`);
+        const contains = button.classList.contains('button-toggle');
+
+        if (activeToggle) {
+          prevbutton.classList.remove('button-toggle');
+        }
+
+        if (!contains) {
+          button.classList.add('button-toggle');
+          activeToggle = true;
+          prevbutton = button;
+        } else if (activeToggle && contains) {
+          button.classList.remove('button-toggle');
+        }
+        
+      }
+    </script>
+  </body>
+</html>

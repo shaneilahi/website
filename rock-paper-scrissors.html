@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+    <title>Rock Paper Scissors</title>
+
+      <style>
+        body {
+          background-color: rgb(24, 24, 24);
+          font-family: Arial;
+        }
+
+        .both-result {
+          font-size: x-large;
+        }
+
+        .move-icon {
+          background-color: transparent;
+          border-radius: 90px;
+          border: 3px solid white;
+          margin: 10px;
+          padding: 15px;
+          cursor: pointer;
+        }
+
+        .reset-score {
+          border: none;
+          font-size: 15px;
+          padding: 8px 15px;
+          cursor: pointer;
+        }
+
+      </style>
+
+  </head>
+
+  <body>
+    <h1 style="color: white;">Rock Paper Scissors</h1>
+
+    <div id="choice"></div>
+    <div id="result"></div>
+
+    <script>
+      let scoree = {
+        wins: 0,
+        losses: 0,
+        ties: 0
+      };
+      let score = document.createElement('p');
+      score.id = 'score1';
+      let result = `Wins: ${scoree.wins}, Losses: ${scoree.losses}, Ties: ${scoree.ties}`;
+      score.innerText = result;
+      score.style = 'color: white;';
+      document.body.appendChild(score);
+
+      let resetResult = document.getElementById('result');
+      onChoose = event => {
+        let showResult = document.createElement('p')
+        let bothResult = document.createElement('p');
+        bothResult.style = 'color: white;';
+        bothResult.className = 'both-result';
+        resetResult.innerHTML = '';
+
+        const userChoice = event.target.id;
+        const choices = ['rock', 'paper', 'scissor'];
+        const emojiChoices = {
+          rock: '✊',
+          paper: '✋',
+          scissor: '✌️'
+        };
+        
+        let randomNumber = Math.floor(Math.random() * choices.length);
+        let computerChoice = choices[randomNumber];
+
+        console.log(`User Choice: ${userChoice},\nComputer choice: ${computerChoice}`);
+
+        userWon = () => {
+          showResult.innerText = 'User Won.';
+          showResult.style = 'color: white; font-size: 30px;'
+          resetResult.appendChild(showResult);
+        }
+
+        compWon = () => {
+          showResult.innerText = 'Comp Won.';
+          showResult.style = 'color: white; font-size: 30px;'
+          resetResult.appendChild(showResult);
+        }
+
+        printBothResult = (user, comp) => {
+          bothResult.innerText = `You ${emojiChoices[user]}  ${emojiChoices[comp]} Computer`;
+          resetResult.appendChild(bothResult);
+        }
+
+        if (userChoice == computerChoice) {
+          console.log('Tie'); ++scoree.ties;
+          showResult.innerText = 'Tie.';
+          showResult.style = 'color: white; font-size: 30px;'
+          resetResult.appendChild(showResult);
+
+ 
+          if (userChoice == 'rock' && computerChoice == 'rock') {
+            printBothResult(userChoice, computerChoice);
+          } else if (userChoice == 'paper' && computerChoice == 'paper') {
+            printBothResult(userChoice, computerChoice);
+          } else if (userChoice == 'scissor' && computerChoice == 'scissor') {
+            printBothResult(userChoice, computerChoice);
+          }
+
+        }
+        
+        shortUserWon = () => {
+          console.log('User won'); 
+          ++scoree.wins;
+          userWon();
+          printBothResult(userChoice, computerChoice);
+        };
+
+        shortCompWon = () => {
+          console.log('Comp won'); 
+          ++scoree.losses;
+          compWon();
+          printBothResult(userChoice, computerChoice);
+        }
+
+        if (userChoice == 'rock' && computerChoice == 'scissor') shortUserWon();
+        if (userChoice == 'paper' && computerChoice == 'rock') shortUserWon();
+        if (userChoice == 'scissor' && computerChoice == 'paper') shortUserWon();
+
+        if (computerChoice == 'rock' && userChoice == 'scissor') shortCompWon();
+        if (computerChoice == 'paper' && userChoice == 'rock') shortCompWon();
+        if (computerChoice == 'scissor' && userChoice == 'paper') shortCompWon();
+
+        result = `Wins: ${scoree.wins}, Losses: ${scoree.losses}, Ties: ${scoree.ties}`;
+        score.innerText = result;
+
+      }
+      
+
+      let src = document.getElementById('choice');
+
+      const buttonElement1 = document.createElement('button');
+      const buttonElement2 = document.createElement('button');
+      const buttonElement3 = document.createElement('button');
+      let img1 = document.createElement('img');
+      img1.src = 'img1.png';
+      img1.height = 100;
+      img1.id = 'rock';
+      img1.onclick = onChoose;
+
+
+      buttonElement1.className = 'move-icon';
+      buttonElement1.appendChild(img1);
+      src.appendChild(buttonElement1);
+
+      let img2 = document.createElement('img');
+      img2.src = 'img2.png';
+      img2.height = 100;
+      img2.id = 'paper';
+      img2.onclick = onChoose;
+
+      buttonElement2.className = 'move-icon';
+      buttonElement2.appendChild(img2);
+      src.appendChild(buttonElement2);
+
+      let img3 = document.createElement('img');
+      img3.src = 'img33.png';
+      img3.height = 100;
+      img3.id = 'scissor';
+      img3.onclick = onChoose;
+
+      buttonElement3.className = 'move-icon';
+      buttonElement3.appendChild(img3);
+      src.appendChild(buttonElement3);
+
+      resetScore = () => {
+        scoree.wins = 0;
+        scoree.losses = 0;
+        scoree.ties = 0;
+        result = `Wins: ${scoree.wins}, Losses: ${scoree.losses}, Ties: ${scoree.ties}`;
+        score.innerText = result;   
+
+        resetResult.innerHTML = '';
+        console.log('Score Resetted');
+      }
+
+    </script>
+    <button class="reset-score" onclick="resetScore();">Reset Score</button>
+  </body>
+</html>

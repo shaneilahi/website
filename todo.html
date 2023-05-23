@@ -1,0 +1,194 @@
+<html>
+    <head>
+        <title>Shane's Todo App</title>
+        <style>
+          body {
+            font-family: Arial;
+          }
+
+          .todo-row {
+            display: grid;
+            grid-template-columns: 200px 150px 100px;
+            align-items: center;
+            column-gap: 10px;
+            margin-bottom: 10px;
+          }
+
+          
+
+          .delete-button {
+            border: none;
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            /* margin-left: 50px; */
+            font-size: small;
+            cursor: pointer;
+            font-size: 15px;
+          }
+
+          .add-button {
+            border: none;
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 15px;
+          }
+
+          .addtodo-function {
+            display: grid;
+            grid-template-columns: 200px 150px 100px;
+            align-items: center;
+            column-gap: 10px;
+            margin-bottom: 10px;
+          }
+
+          .date-input {
+            padding: 6px;
+            font-size: 15px;
+          }
+
+          .title-input {
+            padding: 8px 6px;
+            font-size: 15px;
+          }
+
+        </style>
+    </head>
+    <body>
+        <!-- <p>Todo List</p> -->
+        <div class="addtodo-function">
+          <input class="title-input" placeholder="Todo name" id="todo-title" type="text"/>
+          <input class="date-input" id="date-picker" type="date"/>
+          <button class="add-button" onclick="addTodo()">Add</button>
+        </div>
+        
+        <div class="todo-list" id="todo-list"></div>
+
+        <script>
+            // Model
+            let todos;
+
+            // Get localStorage
+            const savedTodos = JSON.parse(localStorage.getItem('todos')); // we retrive the todos string array from our localstorage and uses JSON.parse function to convert the string array back to actual array of objects.
+
+            if (Array.isArray(savedTodos)){ // if the savedToDos is array that meeans our localstorage has stored an array lets use that instead of usiing thee default array
+                todos = savedTodos;
+            } else { // if the savedTodos is not array that meeans localstorage hasn't stored our array yet so lets use the default array to create the todos
+                todos = [{
+                    title: 'Get groceries',
+                    dueDate: '2021-10-04',
+                    id: 'id1'
+                }, {
+                    title: 'Wash car',
+                    dueDate: '2021-10-04',
+                    id: 'id2'
+                }, {
+                    title: 'Make Dinner',
+                    dueDate: '2021-10-04',
+                    id: 'id3'
+                }, {
+                    title: 'Do laundry',
+                    dueDate: '2021-10-04',
+                    id: 'id4'
+                }];            
+            }
+
+            function saveTodos() {
+                // saves the current todos into localstorage with our given key.
+                // we uses JSON.stringify function to convert our todos array to a string cuz localstorage can only store string version of array/objects
+                localStorage.setItem('todos', JSON.stringify(todos)); 
+            }
+
+
+
+            // Creates a todo (model - managing data)
+            function createTodo(title, dueDate) {
+                const id = '' + new Date().getTime(); // generate an id
+
+                todos.push({ // creates an object and pushes onto the array
+                    title: title,
+                    dueDate: dueDate,
+                    id: id
+                });
+
+                // Since this function modifies our todos. we need to save the modfied todos to localStorage
+                saveTodos();
+            }
+
+            // Deletes a todo (model - managing data)
+            function removeTodo(deleteButtonID) {
+                todos = todos.filter(function (todo) {
+                    if (todo.id === deleteButtonID) { // if the current elementObj.id matches with button id 
+                        return false; // then remove the current todo from the list.
+                    } else {
+                        return true; // for everything else return true so only the clicked on are deleted
+                    }
+                    });
+                
+                // Since this function modifies our todos. we need to save the modfied todos to localStorage
+                saveTodos();
+            }
+            
+
+            // Controller section (responds to events and uses model and view together to produce an output)
+           function addTodo()
+           {
+                const textbox = document.getElementById('todo-title');
+                const title = textbox.value; // grabs input from todo textbox
+
+                const datePicker = document.getElementById('date-picker');
+                const dueDate = datePicker.value; // grabs the date from the todo date selector
+
+                createTodo(title, dueDate); // creates a todo object (with keys title,dueDate, id same as todos objects elements) and then pushes onto the todos array.
+                render();
+           }
+
+           function deleteTodo(event)
+           {
+               console.log(event.target.id);
+               const deleteButtonID = event.target.id;
+
+               removeTodo(deleteButtonID); // calls the model function which basically filters out the object that matches with delete button id from todos array.
+               
+               render(); // calls the view function which renders the updated todos. without needing to experiment with the html. we just updates the todos and vallah
+                
+           }
+
+           // View (All the code that manages visuals (basically creating visual elements))
+           function render()
+           {
+                // Reset our list
+                document.getElementById('todo-list').innerHTML = ''; // access our list of div using id and resets the div usinig innerHTML with blank value
+                
+                todos.forEach(function (todo) {
+                    const element = document.createElement('div');
+                    element.className = 'todo-row';
+
+                    const todoTitile = document.createElement('div');
+                    const todoDate = document.createElement('div');
+
+                    todoTitile.innerHTML = todo.title;
+                    todoDate.innerHTML = todo.dueDate;
+                    element.append(todoTitile, todoDate);
+                    //element.innerText = todo.title + ' ' + todo.dueDate;
+                    ///element.style = 'margin-right: 20px';
+
+                    const button = document.createElement('button');
+                    button.innerText = 'Delete';
+                    button.className = 'delete-button';
+                    button.id = todo.id;
+                    button.onclick = deleteTodo;
+                    element.appendChild(button);
+                    
+                    document.getElementById('todo-list').appendChild(element);
+            });
+           }
+
+           render();
+
+        </script>
+    </body>
+</html>
+

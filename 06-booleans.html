@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Rock Paper Scissor</title>
+      <style>
+      </style>
+  </head>
+  <body>
+
+    <p>Rock Paper Scissors</p>
+    <button onclick="pick('rock');">Rock</button>
+    <button onclick="pick('paper');">Paper</button>
+    <button onclick="pick('scissors');">Scissors</button>
+    <button onclick="score.resetScore();">Reset Score</button>
+
+
+    <script>
+    const picks = ['rock','paper','scissors'];
+    let score = JSON.parse(localStorage.getItem('score1'));
+
+    saveScore = () => {
+      localStorage.setItem('score1', JSON.stringify(score));
+    }
+
+    let fs = () => { return `Wins: ${score.wins}, Losses: ${score.losess}, Ties: ${score.ties}`; };
+    let rs = () => {
+      score.wins = 0;
+      score.losess = 0;
+      score.ties = 0;
+      saveScore();
+      console.log('reseted');
+    };
+
+    if (score) {
+      score.fullScore = fs;
+      score.resetScore = rs;
+    } else {
+      score = {
+      wins: 0,
+      losess: 0,
+      ties: 0,
+      fullScore: fs,
+      resetScore: rs
+    };
+    }
+
+    pickComputerMove = () => {
+      const randomNum = Math.floor(Math.random() * picks.length);
+      const compPick = picks[randomNum];
+      return compPick;
+    }
+
+      pickWinner = (userPick, compPick) => {
+        console.log(`user: ${userPick}, program: ${compPick}`);
+        if (userPick == 'rock' && compPick == 'scissors') {
+          ++score.wins;
+          return 'You Win';
+        }
+        else if (userPick == 'paper' && compPick == 'rock') {
+          ++score.wins;
+          return 'You Win';
+        }
+        else if (userPick == 'scissors' && compPick == 'paper') {
+          ++score.wins;
+          return 'You Win';
+        }
+        else if (compPick == 'rock' && userPick == 'scissors') {
+          ++score.losess;
+          return 'You lose';
+        }
+        else if (compPick == 'paper' && userPick == 'rock') {
+          ++score.losess;
+          return 'You lose';
+        }
+        else if (compPick == 'scissors' && userPick == 'paper') {
+          ++score.losess;
+          return 'You lose';
+        }
+        else if (userPick == compPick) { ++score.ties; return 'tie';}
+      }
+
+      pick = userPick => {
+        let compPick = pickComputerMove();
+        let winner = pickWinner(userPick, compPick);
+        saveScore();
+        alert(`You picked ${userPick}. Computer picked ${compPick}. ${winner}\n${score.fullScore()}`);
+      } 
+
+
+    </script>
+  </body>
+</html>

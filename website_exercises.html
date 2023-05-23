@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Exercises</title>
+    <style>
+      .add-to-cart-button {
+        background-color: yellow;
+      }
+      .buy-now-button {
+        background-color: orange;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--Lesson 4 Exercises HTML CSS Reeeview, console log-->
+    <button>Click</button>
+    <button>Shane</button>
+    <button>Kitkat</button>
+    <p>Hello World</p>
+    <p>Today i went to the grocery storee eto buy sommemomm eeggs and vegeetablees.</p>
+    
+    <button class="yellow-cart">Add to cart</button>
+    <button class="orange-buy">Buy now</button>
+
+    <!--Challenge Exercise-->
+    <p>Adult Plain Cotton T-shirt</p>
+    <p>Price: $7.99</p>
+    <button class="add-to-cart-button" onclick="onAddToCart();">Add to cart</button>
+    <button class="buy-now-button" onclick="onBuy();">Buy now</button>
+
+  </body>
+
+  <script>
+    console.log('Wc!');
+
+    onAddToCart = () => {
+      alert('Added');
+    }
+
+    onBuy = () => {
+      console.log('Loading...');
+      alert('Purchased');
+    }
+
+    greet = name => {
+      if (!name) console.log('Hi there');
+      else console.log(`Hello ${name}`);
+    }
+
+    toFahrenheit = celsius => {
+      return (celsius * 9/5) + 32;
+    }
+    
+
+    toCelsius = fahren => {
+      return (fahren - 32) * 5/9;
+    }
+
+    convertTemp = (degree, unit) => {
+      if (unit === 'C') return ((degree * 9/5) + 32) + unit;
+      else if (unit === 'F') return ((degree -32) *5/9) + unit;
+    }
+
+
+  </script>
+</html>

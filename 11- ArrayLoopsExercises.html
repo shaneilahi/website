@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Arrays annd lops</title>
+  </head>
+  <body>
+    <script>
+      // 11o.
+      const arrayStrings = ['hello','world','search','good', 'search'];
+      const arratStrings2 = ['not', 'found'];
+
+      const searchString = (array, string) => {
+        let foundIndex = null;
+        for (let i = 0; i < array.length; ++i) {
+          if (array[i] === string) {
+            foundIndex = i;
+            break;
+          }
+        }
+
+        if (!foundIndex) {
+          return -1;
+        } else {
+          return foundIndex;
+        }
+    }
+
+    console.log(searchString(arrayStrings, 'search'));
+    console.log(searchString(arratStrings2, 'search'));
+
+    // 11r. removeEgg(foods)
+    const removeEgg = foods => {
+
+      foods = foods.filter(element => {
+        if (element === 'egg') {
+          return false;
+        } else {
+          return true;
+        }
+      });
+
+      return foods;
+    }
+
+    const removeEgg2 = foods => {
+
+      const tempArray = [];
+
+      for (let i = 0; i < foods.length; ++i) {
+        if (foods[i] === 'egg') {
+          continue;
+        } else {
+          tempArray.push(foods[i]);
+        }
+      }
+
+      return tempArray;
+  }
+
+  // 11s.
+    const removeEgg3 = foods => {
+
+      const tempArray = [];
+      let counter = 0;
+
+      for (let i = 0; i < foods.length; ++i) {
+        if (foods[i] === 'egg' && counter < 2) {
+          ++counter
+          continue;
+        } else {
+          tempArray.push(foods[i]);
+        }
+      }
+      return tempArray;
+  }
+
+  // 11t.
+  const removeEgg4 = foods => {
+    const tempfood = foods.slice();
+    tempfood.reverse();
+    const tempArray = [];
+    let counter = 0;
+
+    for (let i = 0; i < tempfood.length; ++i) {
+      if (tempfood[i] === 'egg' && counter < 2) {
+        ++counter
+        continue;
+      } else {
+        tempArray.push(tempfood[i]);
+      }
+    }
+    return tempArray.reverse();
+    }
+
+    const foods = ['egg','apple','egg','egg','ham'];
+    console.log(removeEgg(foods));
+    console.log(removeEgg2(foods));
+    console.log(removeEgg3(foods));
+    console.log(removeEgg4(foods));
+
+    // CE 11v.
+    for (let x = 1; x <= 20; ++x) {
+      if (x % 3 === 0 && x % 5 === 0)
+      console.log('fizzbuzz');
+      else if (x % 3 === 0)
+      console.log('fizz');
+      else if (x % 5 === 0)
+      console.log('buzz');
+      else
+      console.log(x);
+    }
+
+    // 11w.
+    const unique = (array) => {
+        let uniqueArray = [];
+        for (let i = 0; i < array.length; ++i) {
+          if (!uniqueArray.find(element => {
+            if (element === array[i]) return true;
+            else return false;
+          })) {
+            uniqueArray.push(array[i]);
+          } else {
+            continue;
+          }
+        };
+
+        return uniqueArray;
+    }
+
+    console.log(unique(['red','green','green','red']));
+    console.log(unique(['green','red','blue','red']));
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>App</title>
+  </head>
+  <style></style>
+  <body>
+
+    <button class="start-button-1">Start</button> <p></p>
+    <button onclick="onFinish2();" class="start-button-2">Start</button> <p></p>
+    <button onclick="addToCart();">Add to cart</button>
+    <p class="status"></p>
+    <button onclick="addToCart2();">Add to cart</button>
+    <p class="status-2"></p>
+    <button onclick="++message; displayNotification();">Add</button>
+    <button onclick="decreaseMessage();">Rem</button>
+
+    <script>
+      // 12a.
+      const add = () => {console.log(2+3)};
+      add(); add();
+
+      // 12b.
+      const runTwice = fc => {
+        if (typeof fc === 'function') {
+          fc();
+          fc();
+        } else {
+          alert('Invalid input');
+        }
+      }
+      runTwice(add);
+
+      // 12c.
+      let isStart = false;
+      const startButtonElement = document.querySelector('.start-button-1');
+      startButtonElement.addEventListener('click', () => {
+        if (!isStart) {
+          setTimeout(() => {
+          startButtonElement.innerHTML = 'Finished';
+        }, 1000);
+        isStart = true;
+        } else {
+          isStart = false;
+          startButtonElement.innerHTML = 'Start';
+        }
+      })
+
+      
+      const onFinish = () => {
+        if (!isStart) {
+          setTimeout(() => {
+          startButtonElement.innerHTML = 'Finished';
+        }, 1000);
+        isStart = true;
+        } else {
+          isStart = false;
+          startButtonElement.innerHTML = 'Start';
+        }
+      }
+
+      // 12d.
+      let isStart2 = false;
+      const startButtonElement2 = document.querySelector('.start-button-2');
+      
+      const revertOnClick = () => {
+        startButtonElement2.onclick = () => {onFinish2();};
+      };
+
+      const setLoading = () => {
+        startButtonElement2.innerHTML = 'Loading...';
+        startButtonElement2.onclick = () => {}; // Empty on click so nothing happpens while its loading
+      };
+
+      const onFinish2 = () => {
+        setLoading();
+
+        if (!isStart2) {
+          setTimeout(() => {
+          startButtonElement2.innerHTML = 'Finished';
+          revertOnClick();
+        }, 1000);
+        isStart2 = true;
+        } else {
+          isStart2 = false;
+          startButtonElement2.innerHTML = 'Start';
+          revertOnClick();
+        }
+      };
+
+      // 12e.
+      const addToCart = () => {
+         const statusElement = document.querySelector('.status');
+         statusElement.innerHTML = 'Added';
+         setTimeout(() => {
+          statusElement.innerHTML = '';
+         }, 2000);
+
+      }
+
+      // 12f.
+      const statusElement = document.querySelector('.status-2');
+      let setTimeoutId;
+      let isNew = false;
+      const addToCart2 = () => {
+         statusElement.innerHTML = 'Added';
+         
+         if (!isNew) {
+          setTimeoutId = setTimeout(() => {
+          statusElement.innerHTML = '';
+         }, 2000);
+         isNew = true;
+         } else {
+          clearTimeout(setTimeoutId);
+          isNew = false;
+          addToCart2();
+         }
+      };
+
+      // 12g.
+      let message = 0;
+      let titleInterval;
+      let isDisplayMsg = false;
+      const decreaseMessage = () => {
+        if ((message - 1) < 0) {
+          alert('Can not go below 0');
+        } else if (message > 0) {
+          --message;
+          if (message === 0) {
+          stopNotification();
+        }
+      }
+    };
+
+      const displayNotification = () =>{
+
+        if (isDisplayMsg) {
+          return;
+        }
+
+        isDisplayMsg = true;
+
+        titleInterval = setInterval(() => {
+        if (document.title === 'App') {
+          document.title = `(${message}) New messages`;
+        } else {
+          document.title = 'App';
+        }
+      }, 1000);
+      };
+
+      const stopNotification = () => {
+        isDisplayMsg = false;
+
+        clearInterval(titleInterval);
+        document.title = 'App';
+      }
+
+      let myArray = [1,2,3];
+      
+
+      console.log(myArray);
+      
+      // 12j
+      const multiply = (num1, num2) => num1 * num2;
+      console.log(multiply(3,3));
+    
+      // 12l
+      const countPositive = nums => {
+        let count = null;
+        nums.forEach(element => {
+          if (element >= 0) ++count;
+        });
+
+        return count;
+      }
+
+      // 12m
+      const addNum = (array, num) => array.map(element => element + num);
+
+      // 12n
+      const removeEgg = array => array.filter(element => element === 'egg' ? false : true );
+      const removeEgg2 = array => array.filter(element => !(element === 'egg') );
+
+      // 12o
+      let eggCounter = 0;
+      const remove2Eggs = array => array.filter(element => {
+        if (element === 'egg' && eggCounter < 2) {
+          ++eggCounter;
+          return false;
+        } else {
+          return true;
+        }
+      } );
+
+      const remove2Eggs2 = array => array.filter(element => (element === 'egg' && eggCounter++ < 2) ? false : true);
+
+      // 12p
+
+
+
+      console.log(countPositive([1,2,3,-5,-2]));
+      console.log(addNum([1,2,3], 2));
+      console.log(removeEgg2(['egg','apple','egg']));
+      console.log(remove2Eggs2(['egg','no','egg','egg','app;e','egg']));
+
+
+
+
+
+    </script>
+  </body>
+</html>

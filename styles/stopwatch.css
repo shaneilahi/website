@@ -1,0 +1,53 @@
+body {
+  background-color:rgb(37, 37, 37);
+  color: white;
+  /* font-size: 150px; */
+}
+
+.time {
+  font-size: 150px;
+  margin-top: 250px;
+  text-align: center;
+}
+
+.formate {
+  font-size: 30px;
+  text-align: center;
+  margin-top: -150px;
+}
+
+.start-icon-button {
+  background-color: transparent;
+  border-radius: 80px;
+  padding: 15px;
+  background-color: rgb(65, 106, 240);
+  border: none;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.start-icon,
+.reset-icon {
+  height: 50px;
+  width: 50px;
+  
+}
+
+.start-pause-reset {
+  text-align: center;
+}
+
+.reset-off-button {
+  background-color: rgb(49, 51, 51);
+}
+
+.reset-button {
+  border-radius: 50px;
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.rest-on-button {
+  background-color: rgb(240, 253, 255);
+}

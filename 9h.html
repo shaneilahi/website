@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>DOm</title>
+  </head>
+  <body>
+    <input type="text" class="js-input" onkeyup="handleOnKeyUp(event);"/>
+    <p class="js-para"></p>
+    <script>
+      const paraElement = document.querySelector('.js-para');
+      const inputElement = document.querySelector('.js-input');
+      const handleOnKeyUp = event => {
+        const text = inputElement.value;
+        paraElement.innerHTML = text;
+      }
+
+    </script>
+  </body>
+</html>

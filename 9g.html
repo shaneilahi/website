@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>DOm</title>
+  </head>
+  <body>
+    <script>
+      // All our div elements
+      let subDiv = document.createElement('div');
+      let rockDiv = document.createElement('div');
+      let ascDiv = document.createElement('div');
+
+      // subDiv
+      let subDivPara = document.createElement('p');
+      let subDivSubButton = document.createElement('button');
+      subDivPara.innerHTML = 'YouTube Subscribe Button';
+      subDivSubButton.innerHTML = 'Subscribe';
+      subDivSubButton.onclick = () => {
+        (subDivSubButton.innerHTML === 'Subscribed') ?
+         subDivSubButton.innerHTML = 'Subscribe' : subDivSubButton.innerHTML = 'Subscribed';
+      }
+
+
+      subDiv.appendChild(subDivPara);
+      subDiv.appendChild(subDivSubButton);
+
+      document.body.appendChild(subDiv);
+
+      // rockDiv
+      let rockDivPara = document.createElement('p');
+      let rockDivLink = document.createElement('a');
+      rockDivPara.innerHTML = 'Rock Paper Scissors';
+      rockDivLink.innerHTML = 'Click here';
+      rockDivLink.href = 'rock-paper-scrissors.html'
+      rockDivLink.target = '_blank';
+
+      rockDiv.appendChild(rockDivPara);
+      rockDiv.appendChild(rockDivLink);
+
+      document.body.appendChild(rockDiv);
+
+      // ascDiv
+      let ascDivPara = document.createElement('p');
+      let ascDivInput = document.createElement('input');
+      let ascDivButton = document.createElement('button');
+      let ascCost = document.createElement('p');
+      ascDivPara.innerHTML = 'Amazon Shipping Calculator<br><br>Orders under $40 = +$10 shipping.<br><br>Orders over $40 = FREE shipping.';
+      ascDivInput.type = 'text';
+      ascDivInput.placeholder = 'Cost of Order';
+      ascDivInput.onkeydown = () => {
+        console.log(event);
+        if (event.key === 'Enter') {
+          ascDivButton.click();
+        }
+
+      }
+      // ascDivInput.addEventListener('keypress', (event) => {
+      //   if (event.key === 'Enter') {
+      //     ascDivButton.click();
+      //   }
+      // });
+
+      ascDivButton.innerHTML = 'Calculate';
+      ascDivButton.style = 'margin-left: 5px;';
+      ascDivButton.onclick = () => {
+        let cost = Number(ascDivInput.value);
+        
+        if (cost < 40) {
+          cost += 10;
+        }
+
+        let fixPrecision = Math.round((cost + Number.EPSILON) * 100) / 100;
+        ascCost.innerHTML = `$${fixPrecision}`;
+      }
+
+      
+      ascDiv.appendChild(ascDivPara);
+      ascDiv.appendChild(ascDivInput);
+      ascDiv.appendChild(ascDivButton);
+      ascDiv.appendChild(ascCost);
+      document.body.appendChild(ascDiv);
+
+      console.log(window);
+
+    </script>
+  </body>
+</html>

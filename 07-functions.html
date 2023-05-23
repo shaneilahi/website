@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Calculator with css</title>
+    <style>
+      body {
+        font-family: Arial;
+        background-color: black;
+        margin-top: -34px;
+      }
+
+      .number-button {
+        background-color: rgb(44, 44, 44);
+        border: none;
+        border-radius: 50px;
+        font-size: 25px;
+        height: 60px;
+        width: 60px;
+        /* padding: 15px 23px; */
+        margin-right: 5px;
+        cursor: pointer;
+      }
+
+      .sign-button {
+        background-color: orange;
+        border: none;
+        border-radius: 50px;
+        font-size: 25px;
+        height: 60px;
+        width: 60px;
+        cursor: pointer;
+      }
+
+      .clear-button {
+        background-color: rgb(44, 44, 44);
+        border: none;
+        border-radius: 50px;
+        font-size: 16px;
+        height: 60px;
+        width: 60px;
+        cursor: pointer;
+      }
+
+      .js-calculation {
+        /* font-weight: bold; */
+        font-size: 50px;
+        margin-bottom: 20px;
+      }
+   
+    </style>
+  </head>
+  <body> 
+           
+    <!-- <p>Calculator</p> -->
+  
+    <p class="js-calculation"></p>
+
+    <button class="number-button" onclick="updateCalculation(1);">1</button>
+    <button class="number-button" onclick="updateCalculation(2);">2</button>
+    <button class="number-button" onclick="updateCalculation(3);">3</button>
+    <button class="sign-button" onclick="updateCalculation('+');">+</button>
+
+    <p>
+      <button class="number-button" onclick="updateCalculation(4);">4</button>
+      <button class="number-button" onclick="updateCalculation(5);">5</button>
+      <button class="number-button" onclick="updateCalculation(6);">6</button>
+      <button class="sign-button" onclick="updateCalculation('-');">-</button>
+    </p>
+    
+    <p>
+      <button class="number-button" onclick="updateCalculation(7);">7</button>
+      <button class="number-button" onclick="updateCalculation(8);">8</button>
+      <button class="number-button" onclick="updateCalculation(9);">9</button>
+      <button class="sign-button" onclick="updateCalculation('*');">*</button>
+    </p>
+
+    <p>
+      <button class="number-button" onclick="updateCalculation(0);">0</button>
+      <button class="number-button" onclick="updateCalculation('.');">.</button>
+      <button class="number-button" onclick="updateCalculation('=');">=</button>
+      <button class="sign-button" onclick="updateCalculation('/');">/</button>
+    </p>
+    
+    <button class="clear-button" onclick="updateCalculation('clear');">Clear</button>
+
+    <script>
+      let calculation = localStorage.getItem('calc') || '';
+      let jsCalculation = document.getElementsByClassName('js-calculation');
+
+      const saveCalculation = () => {
+        localStorage.setItem('calc', calculation);
+      }
+
+      const showCalculation = () => {
+        if (calculation !== '' || calculation !== null)
+       {
+        jsCalculation[0].innerHTML = calculation;
+       }
+      }
+
+      showCalculation();
+
+      logCal = () => {
+        console.log(calculation);
+        showCalculation();
+        saveCalculation();
+      }
+      
+      updateCalculation = number => {
+        
+        if ((typeof number) == 'number') {
+          calculation += number;
+          logCal();
+        } else if ((typeof number) === 'string' && (number === '+' || number === '-' || number === '*' || number === '/')) {
+          calculation += ` ${number} `;
+          logCal(); 
+        } else if ((typeof number) === 'string' && number === '.') {
+          calculation += '.';
+          logCal();
+        } else if ((typeof number === 'string') && number === '=') {
+          calculation = eval(calculation);
+          logCal();
+        } else if (number === 'clear') {
+          calculation = '';
+          console.log('Cleared');
+          logCal();
+        }
+    }
+
+    </script>
+  </body>
+</html>

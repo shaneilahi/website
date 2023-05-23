@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>DOm</title>
+    <style>
+      body {
+        font-family: Arial;
+      }
+
+      div {
+        border: 1px solid grey;
+        padding: 8px;
+    }
+
+      .subscribe-button {
+        border: none;
+        background-color: black;
+        color: white;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-weight: bold;
+        border-radius: 50px;
+        cursor: pointer;
+        margin-bottom: 30px;
+      }
+      
+      .is-subscribed {
+        background-color: rgb(241, 241, 241);
+        color: black;
+      }
+
+      .calculate-button {
+        border: none;
+        background-color: green;
+        color: white;
+        /* padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 15px;
+        padding-right: 15px; */
+
+        font-size: 15px;
+        padding: 12px 15px;  
+        cursor: pointer;
+      }
+
+      .cost-input {
+        font-size: 15px;
+        /* padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px; */
+        padding: 10px;
+      }
+
+      .is-Invalid {
+        color: red;
+        font-weight: bold;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <script>
+      // All our div elements
+      let subDiv = document.createElement('div');
+      let rockDiv = document.createElement('div');
+      let ascDiv = document.createElement('div');
+
+      // subDiv
+      let subDivPara = document.createElement('p');
+      let subDivSubButton = document.createElement('button');
+      subDivPara.innerHTML = 'YouTube Subscribe Button';
+      subDivSubButton.innerHTML = 'Subscribe';
+      subDivSubButton.className = 'subscribe-button';
+      subDivSubButton.onclick = () => {
+        if (subDivSubButton.innerHTML === 'Subscribe') {
+          subDivSubButton.innerHTML = 'Subscribed';
+          subDivSubButton.classList.add('is-subscribed'); // adds a class name to our button elemmment which we can use it to style the button after click
+        } else {
+          subDivSubButton.innerHTML = 'Subscribe';
+          subDivSubButton.classList.remove('is-subscribed');
+        } }
+
+      subDiv.appendChild(subDivPara);
+      subDiv.appendChild(subDivSubButton);
+
+      document.body.appendChild(subDiv);
+
+      // rockDiv
+      let rockDivPara = document.createElement('p');
+      let rockDivLink = document.createElement('a');
+      rockDivPara.innerHTML = 'Rock Paper Scissors';
+      rockDivLink.innerHTML = 'Click here';
+      rockDivLink.href = 'rock-paper-scrissors.html'
+      rockDivLink.target = '_blank';
+
+      rockDiv.appendChild(rockDivPara);
+      rockDiv.appendChild(rockDivLink);
+
+      document.body.appendChild(rockDiv);
+
+      // ascDiv
+      let ascDivPara = document.createElement('p');
+      let ascDivInput = document.createElement('input');
+      let ascDivButton = document.createElement('button');
+      let cost = document.createElement('p');
+      ascDivPara.innerHTML = 'Amazon Shipping Calculator<br><br>Orders under $40 = +$10 shipping.<br><br>Orders over $40 = FREE shipping.';
+      ascDivInput.type = 'text';
+      ascDivInput.placeholder = 'Cost of Order';
+      ascDivInput.className = 'cost-input';
+      ascDivInput.onkeydown = () => {
+        console.log(event);
+        if (event.key === 'Enter') {
+          ascDivButton.click();
+        }
+
+      }
+      // ascDivInput.addEventListener('keypress', (event) => {
+      //   if (event.key === 'Enter') {
+      //     ascDivButton.click();
+      //   }
+      // });
+
+      ascDivButton.innerHTML = 'Calculate';
+      ascDivButton.style = 'margin-left: 5px;';
+      ascDivButton.className = 'calculate-button';
+      ascDivButton.onclick = () => {
+        let inputValue = Number(ascDivInput.value);
+        if (cost.classList.contains('is-Invalid')) {
+          cost.classList.remove('is-Invalid');
+        }
+
+        if (inputValue >= 40) {
+          cost.innerHTML = '$' + inputValue;
+        } else if (inputValue < 0) {
+          cost.classList.add('is-Invalid');
+          cost.innerHTML = 'Error: cost cannot be less than 0';
+          //cost.style = `color: red;`;
+        } else {
+          cost.innerHTML = '$' + (inputValue + 10);
+        }
+      }
+
+      
+      ascDiv.appendChild(ascDivPara);
+      ascDiv.appendChild(ascDivInput);
+      ascDiv.appendChild(ascDivButton);
+      ascDiv.appendChild(cost);
+      document.body.appendChild(ascDiv);
+
+      console.log(window);
+
+    </script>
+  </body>
+</html>
